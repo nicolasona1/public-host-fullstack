@@ -1,17 +1,22 @@
 import React from 'react';
+import { Sparkles } from 'lucide-react';
 import './Navbar.css';
 
 function Navbar({onLoginClick, onSignupClick}) {
   return (
     <div className="navbar">
       <div className="navbar-left">
-        <span className="navbar-logo">SmartSpend</span>
+        <a href='/' className='navbar-link-wrapper'>
+        <span className="navbar-logo">
+          <span className="navbar-icon"> 
+            <Sparkles className="h-6 w-6 text-[#3498db]" />
+          </span>
+          <span className="navbar-text">SmartSpend</span>
+        </span>
+        </a>
       </div>
 
       <div className="navbar-right">
-        <a href="/" className="nav-link">Home</a>
-        <a href="#" className="nav-link">About</a>
-        <a href="#" className="nav-link">Why</a>
 
         <div className="dropdown">
           <button className="dropbtn">Account ▾</button>

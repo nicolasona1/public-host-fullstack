@@ -1,0 +1,211 @@
+
+.reset-settings-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .reset-settings-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .reset-settings-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+  }
+  
+  .reset-settings-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .reset-settings-content {
+    padding: 1.5rem;
+  }
+  
+  .reset-settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .reset-settings-info {
+    flex: 1;
+  }
+  
+  .reset-settings-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111827;
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+  
+  .reset-settings-description {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .reset-period-selector {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .reset-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+    color: #374151;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .reset-option:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+  
+  .reset-option.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+  }
+  
+  .reset-option-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .reset-info-row {
+    display: flex;
+    gap: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+  }
+  
+  .reset-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .reset-info-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+  
+  .reset-info-value {
+    font-size: 0.875rem;
+    color: #111827;
+    font-weight: 500;
+  }
+  
+  /* Reset Period Badge Styles (used in other components but related) */
+  .reset-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .reset-badge.monthly {
+    background: #dcfce7;
+    color: #16a34a;
+  }
+  
+  .reset-badge.yearly {
+    background: #fef3c7;
+    color: #d97706;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .reset-settings-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .reset-period-selector {
+      justify-content: center;
+    }
+  
+    .reset-info-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .reset-info-item {
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .reset-settings-content {
+      padding: 1rem;
+    }
+  
+    .reset-option {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+    }
+  
+    .reset-option-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+  
+  /* Focus states for accessibility */
+  .reset-option:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  
+  .reset-option:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+  
+  .reset-option:focus-visible {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  
+  /* Animation for smooth transitions */
+  .reset-settings-card {
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .reset-settings-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Loading state (if needed) */
+  .reset-settings-loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .reset-settings-loading .reset-option {
+    cursor: not-allowed;
+  }
+  

@@ -3,17 +3,26 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: #1e3a8a;
+    background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-radius: 12px;
+    margin: 0 auto;
+    width: 95%;
+    max-width: 1280px;
   }
   
   .navbar-logo {
     font-size: 1.6rem;
     font-weight: bold;
-    color: white;
+    color: #1a202c;
+  }
+  
+  .navbar-icon {
+    color: #3498db;
+    filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.4)); /* Soft glow */
   }
   
   .navbar-right {
@@ -23,7 +32,8 @@
   }
   
   .nav-link {
-    color: white;
+    color: #1a202c;
+    filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.4)); /* Soft glow */
     text-decoration: none;
     font-size: 1rem;
     padding: 6px 10px;
@@ -42,30 +52,37 @@
   
   .dropbtn {
     background-color: #f1f5f9;
-    color: #1e3a8a;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
+    color: #1a202c;
+    filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.4)); /* Soft glow */
+    border: 1px solid #3498db;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(30, 64, 175, 0.1);
   }
   
   .dropdown-content {
     display: none;
     position: absolute;
     background-color: white;
-    color: #1e3a8a;
-    min-width: 160px;
+    color: #1a202c;
+    filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.4)); /* Soft glow */
+    min-width: 220px;
     border-radius: 6px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     right: 0;
-    top: 40px;
+    top: 50px;
     z-index: 1;
+    padding: 0.5rem 0;
   }
   
   .dropdown-content a {
-    color: #1e3a8a;
-    padding: 12px 16px;
+    color: #1a202c;
+    filter: drop-shadow(0 0 10px rgba(52, 152, 219, 0.4)); /* Soft glow */
+    padding: 14px 20px;
     text-decoration: none;
     display: block;
   }
@@ -78,3 +95,11 @@
     display: block;
   }
   
+  .navbar-link-wrapper {
+    text-decoration: none;     /* remove underline */
+    color: inherit;            /* keep existing color */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }

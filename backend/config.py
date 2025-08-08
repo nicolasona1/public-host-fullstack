@@ -14,3 +14,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///mydatabase.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
+SESSION_COOKIE_SAMESITE = "Lax"  # or "None" if you go cross-domain
+SESSION_COOKIE_SECURE = False    # Set to True in production with HTTPS

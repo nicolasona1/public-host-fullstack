@@ -1,24 +1,27 @@
 import React, {useState} from "react";
-
+import "./Auth.css"
 const Signup = ({onSignupClick}) => {
     const [fullName, setFullName] = useState("")
     const [usrName, setUsrName] = useState("")
     const [email, setEmail] = useState("")
     const onSubmit = async (e) => {
         e.preventDefault()
+        // Clear any previous session
+        await fetch("/api/logout", { method: "POST", credentials: "include" });
 
         const data = {
             fullName,
             usrName,
             email,
         }
-        const url = 'http://127.0.0.1:5002/sign_up'
+        const url = '/api/sign_up'
         const options = {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
             },
             body: JSON.stringify(data),
+            credentials: 'include'
         }
         const response = await fetch(url, options)
         if (response.status !== 201 && response.status !== 200){
@@ -30,36 +33,40 @@ const Signup = ({onSignupClick}) => {
     }
     return(
         <form onSubmit={onSubmit}>
-            <h2>Sign Up</h2>
-            <p>New here? Create a free account and start buidling your dashboard!</p>
+        <div className="signup-page">
+            <div className="signup-box">
+            <h2 className="signup-header">Sign Up</h2>
+            <p className="signup-header">New here? Create a free account and start buidling your dashboard!</p>
         <div>
-            <label htmlFor="fullName">Name:</label>
             <input 
             type="text" 
-            id="fullName" 
+            id="fullName"
+            placeholder="Full Name" 
             value={fullName} 
             onChange={(e) => setFullName(e.target.value)}
             />
         </div>
         <div>
-            <label htmlFor="usrName">User Name:</label>
             <input 
             type="text" 
             id="usrName" 
+            placeholder="User name"
             value={usrName} 
             onChange={(e) => setUsrName(e.target.value)}
             />
         </div>
         <div>
-            <label htmlFor="email">Email:</label>
             <input 
             type="email" 
-            id="email" 
+            id="email"
+            placeholder="Email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)}
             />
         </div>
         <button type="submit">Create Account</button>
+        </div>
+        </div>
     </form>
     )
 }

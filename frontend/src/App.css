@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #1e3a8a; /* Elegant dark blue */
+  background-color:white; 
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -14,85 +14,8 @@ body {
   text-align: center;
 }
 
-/* === Navbar Styling === */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  background-color: #1e3a8a;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
-}
-
-.navbar-buttons button {
-  margin-left: 12px;
-  padding: 8px 16px;
-  border: none;
-  background-color: #f1f5f9; /* Light for contrast */
-  color: #1e3a8a;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.navbar-buttons button:hover {
-  background-color: #cbd5e1;
-}
-
-/* === Welcome Page Styling === */
-.welcome-container {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  color: #1e3a8a;
-}
-
-.tagline {
-  font-size: 1.2rem;
-  color: #334155;
-  margin-bottom: 2rem;
-}
-
-.about-section, .mission-section {
-  text-align: left;
-  margin-bottom: 2rem;
-}
-
-.about-section h2, .mission-section h2 {
-  font-size: 1.3rem;
-  color: #1e3a8a;
-  margin-bottom: 0.5rem;
-}
-
-/* === Call-to-Action Button === */
-.cta-button {
-  background-color: #f1f5f9;
-  color: #1e3a8a;
-  font-size: 1rem;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #cbd5e1;
-}
-
 /* === Modal Styling === */
-.modal {
+/* .modal {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -111,7 +34,7 @@ body {
   border: 1px solid #888;
   width: 80%;
   border-radius: 8px;
-}
+} */
 
 .close {
   color: #aaa;
@@ -125,86 +48,28 @@ body {
   cursor: pointer;
 }
 
-/* === Logo & Other Default Styles === */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-/* table styling */
-table {
-  width: 80%;
-  margin: 2rem auto;
-  border-collapse: collapse;
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-  padding: 16px 20px;
-  text-align: center;
-}
-
-th {
-  background-color: #1e3a8a;
-  color: white;
-  font-weight: 600;
-}
-
-tr:nth-child(even) {
-  background-color: #f0f4f8;
-}
-
-/* tr:hover {
-  background-color: #e2e8f0;
-}
-
-button {
-  margin: 0 4px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  background-color: #1e3a8a;
-  color: white;
+.add-button-container {
+  background-color: #e0f2ff; /* light blue background */
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-} */
-/* 
-button:hover {
-  background-color: #374fc7; */
-/* } */
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button-container:hover {
+  background-color: #d0eaff;
+  border-color: #1e40af;
+  transform: translateY(-1px);
+}
+
+.add-button {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e40af;
+  letter-spacing: 0.3px;
+}
+

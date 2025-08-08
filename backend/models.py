@@ -1,4 +1,5 @@
 from config import db
+from datetime import date
 
 #User Model
 class User(db.Model):
@@ -29,6 +30,9 @@ class CreditCard(db.Model):
     budget = db.Column(db.Float, nullable=False)
     bank = db.Column(db.String(100), nullable=False)
     spent = db.Column(db.Float, default=0.0)
+    #reset optioins for users
+    reset_period = db.Column(db.String(10), default="monthly")
+    last_reset = db.Column(db.Date, default=date.today)
    # Foreign key to associate the card with a user
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     def to_json(self):
@@ -38,5 +42,7 @@ class CreditCard(db.Model):
             "budget": self.budget,
             "bank": self.bank,
             "spent": self.spent,
+            "reset_period":self.reset_period,
+            "last_reset":self.last_reset,
             "userId":self.user_id,
         }

@@ -1,0 +1,205 @@
+.page-title{
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+.page-description{
+    font-size: 1.125rem;
+    color: #64748b;
+    max-width: 42rem;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+/* */
+.card-table-container {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card-table-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .card-table-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+  }
+  
+  .card-table-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .card-table-content {
+    padding: 1rem;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-header {
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .table-header-cell {
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 500;
+    color: #374151;
+    font-size: 0.875rem;
+  }
+  
+  .table-header-cell.right {
+    text-align: right;
+  }
+  
+  .table-row {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.2s ease;
+  }
+  
+  .table-row:hover {
+    background: #f8fafc;
+  }
+  
+  .table-cell {
+    padding: 1rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+    color: #0f172a;
+  }
+  
+  .table-cell.font-medium {
+    font-weight: 800;
+    color: #0f172a;
+  }
+  
+  .table-cell.right {
+    text-align: right;
+    color:#0f172a;
+  }
+  
+  .table-cell.min-width {
+    min-width: 200px;
+  }
+  
+  .bank-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .bank-badge.chase {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+  
+  .bank-badge.boa {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+  
+  .bank-badge.default {
+    background: #f3f4f6;
+    color: #374151;
+  }
+  
+  .actions-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+    color: #374151;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .action-button:hover {
+    background: #f8fafc;
+  }
+  
+  .action-button.delete {
+    color: #dc2626;
+  }
+  
+  .action-button.delete:hover {
+    color: #b91c1c;
+  }
+  
+  .action-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .bank-container{
+    text-align: left;
+    vertical-align: middle;
+    padding: 1rem 0.75rem;
+  }
+  .bank-cell{
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #dbeafe;     
+    color: #1e40af;
+    white-space: nowrap;
+    line-height: 1.2;
+    vertical-align: middle;             
+  }
+  .download-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 30px;
+  }
+  
+  .export-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .export-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .export-button:active {
+    transform: scale(0.98);
+  }
+  .spreadsheet-icon {
+    width: 18px;
+    height: 18px;
+  }
+    

@@ -45,3 +45,4 @@ Werkzeug==3.1.3
 openai>=1.40.0
 python-dotenv>=1.0.1   # optional, dev only
 flask-limiter>=3.8.0   # optional, for rate limiting
+gunicorn  # >>> ADDED (for Render to run your app)

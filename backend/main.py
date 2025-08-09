@@ -3,10 +3,18 @@ from config import app, db
 from models import User
 from auth_routes import auth
 from card_routes import cards
+from ai_routes import ai
+from dotenv import load_dotenv, find_dotenv
+from pathlib import Path
+import os
+
+dotenv_path = find_dotenv(usecwd=True) or str(Path(__file__).with_name(".env"))
+load_dotenv(dotenv_path)
 
 #here we are initiating the blue prints
 app.register_blueprint(auth, url_prefix="")
 app.register_blueprint(cards, url_prefix="")
+app.register_blueprint(ai, url_prefix="")
 
 #running the back end so the frontend can fetch data
 if __name__ == "__main__":

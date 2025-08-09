@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Edit, Trash2, CreditCard } from "lucide-react"
 import StatsCards from "../StatsCards/statsCards";
 import { ResetPeriod } from "../resetPeriod/resetPeriod";
+import RecommendationCard from "../Recommendations/Recommendation";
 import "./Dashboard.css"
 
 const CardDashboard = ({cards, updateCard, updateCallBack, showToast}) => {
@@ -73,6 +74,7 @@ const CardDashboard = ({cards, updateCard, updateCallBack, showToast}) => {
                 totalSpent={totalSpent}
                 totalCards={totalCards}
             />
+            <RecommendationCard/>
             <ResetPeriod/>
             <div className="card-table-container">
                 <div className="card-table-header">

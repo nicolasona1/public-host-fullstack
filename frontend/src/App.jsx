@@ -10,7 +10,6 @@ import CardForm from './CreditCard/CardForm'
 import Toast from './Toast/Toast'
 import Navbar2 from './Navbar/Navbar2'
 function App() {
-  //const [users, setUsers] = useState([])
   const [cards, setCards] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCard, setCurrentCard] = useState({})
@@ -29,32 +28,33 @@ function App() {
       setToastVisible(true);
     }, 10);
   };  
+  // Run once on first mount (handles hard refresh)
   useEffect(() => {
-    if (!currentUser) return;       // only fetch once logged in
     fetchCards();
+  }, []);
+
+  // Re-fetch after login (or any user change)
+  useEffect(() => {
+    if (currentUser) fetchCards();
   }, [currentUser]);
 
-  const fetchCards = async() => {
-    if (!currentUser) return; 
-    try{
-      const response = await fetch("/api/user_cards", {
-        credentials: "include"
-      });
-      
+  const fetchCards = async () => { 
+    try {
+      const response = await fetch('/api/user_cards', { credentials: 'include' }); // ensures session cookie is sent
       if (response.ok) {
-        const data = await response.json()
-        setCards(data.cards)
-        console.log(data.cards)
+        const data = await response.json();
+        setCards(Array.isArray(data.cards) ? data.cards : []); // safer assignment
+      } else if (response.status === 401) {
+        setCards([]); // not logged in; keep UI consistent
       } else {
-        console.log("Error fetching cards:", response.status)
-        setCards([])
+        console.log('Error fetching cards:', response.status);
+        setCards([]);
       }
-    } catch (error) {
-      console.log("Error fetching users:", error)
-      setCards([])
+    } catch (err) {
+      console.log('Error fetching cards:', err);
+      setCards([]);
     }
-  }
-  
+  };
 
   const closeModal = () => {
     setIsModalOpen(false)
@@ -76,78 +76,6 @@ function App() {
     closeModal()
     fetchCards()
   }
-
-  // if (screen === 'welcome'){
-  //   return (
-  //     <>
-  //     <Navbar
-  //     onLoginClick={() => setScreen("login")}
-  //     onSignupClick={() => setScreen("signup")}
-  //     />
-  //     <Welcome onGetStarted={() => setScreen("auth")}/>
-  //     </>
-  //   )
-  // }
-  // if (screen === 'signup'){
-  //   return(
-  //   <>
-  //     <Navbar
-  //     onLoginClick={() => setScreen("login")}
-  //     onSignupClick={() => setScreen("signup")}
-  //     />
-  //   <Signup
-  //   onSignupClick={() => {
-  //     setScreen("dashboard")
-  //     fetchCards();
-  //   }}
-  //   />
-  //   </>
-  //   )
-  // }
-  // if (screen === 'login'){
-  //   return (
-  //     <>
-  //     <Navbar
-  //     onLoginClick={() => setScreen("login")}
-  //     onSignupClick={() => setScreen("signup")}
-  //     />
-  //     <Login
-  //     onLoginSuccess={(user) => {
-  //       setCurrentUser(user);
-  //       setScreen("dashboard");
-  //       fetchCards();
-  //     }}
-  //     onSignupClick={() => setScreen("signup")}
-  //     />
-  //     </>
-  //   )
-  // }
-  // if (screen === 'dashboard'){
-  //   return (
-  //     <>
-  //     <Navbar2
-  //     onLogOutClick={() => setScreen("welcome")}
-  //     />
-  //     <CardDashboard cards={cards} updateCard={openEditModal} updateCallBack={onUpdate} showToast={showToast}/>
-  //     <button onClick={openCreateModal} className='add-button-container'>
-  //       <span className='add-button'>+ Add a Card</span>
-  //     </button>
-  //     <CardForm
-  //       isOpen={isModalOpen}
-  //       existingCard={currentCard}
-  //       updateCallBack={onUpdate}
-  //       onClose={closeModal}
-  //       showToast={showToast}
-  //     />
-  //     <Toast
-  //       message={toastMessage}
-  //       type={toastType}
-  //       isVisible={toastVisible}
-  //       onClose={() => setToastVisible(false)}
-  //     />
-  //     </>
-  //   )
-  // }
   
   return (
     <>

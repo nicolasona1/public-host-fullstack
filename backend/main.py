@@ -1,3 +1,4 @@
+# backend/main.py
 from flask import request, jsonify
 from config import app, db
 from models import User
@@ -11,12 +12,11 @@ import os
 dotenv_path = find_dotenv(usecwd=True) or str(Path(__file__).with_name(".env"))
 load_dotenv(dotenv_path)
 
-#here we are initiating the blue prints
-app.register_blueprint(auth, url_prefix="")
-app.register_blueprint(cards, url_prefix="")
-app.register_blueprint(ai, url_prefix="")
+# Register blueprints UNDER /api  <-- change these three lines
+app.register_blueprint(auth, url_prefix="/api")
+app.register_blueprint(cards, url_prefix="/api")
+app.register_blueprint(ai, url_prefix="/api")
 
-#running the back end so the frontend can fetch data
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()

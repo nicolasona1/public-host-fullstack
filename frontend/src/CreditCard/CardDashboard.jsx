@@ -4,24 +4,19 @@ import StatsCards from "../StatsCards/statsCards";
 import { ResetPeriod } from "../resetPeriod/resetPeriod";
 import RecommendationCard from "../Recommendations/Recommendation";
 import "./Dashboard.css"
+import { deleteCard as apiDeleteCard, downloadExcel } from "../api";
 
 const CardDashboard = ({cards, updateCard, updateCallBack, showToast}) => {
     const onDelete = async (id) => {
         try {
-            const options = {
-                method: "DELETE",
-                credentials: "include"
-            }
-            const response = await fetch(`/api/delete_cards/${id}`, options)
-            if (response.status === 200){
-                updateCallBack()
-                showToast("Card deleted successfully", "success")
-            } else {
-                console.error("Failed to delete")
-            }
-        } catch (error) {
-            alert(error)
-        }
+            // CHANGE: use helper
+            await apiDeleteCard(id);
+            updateCallBack(); // CHANGE
+            showToast("Card deleted successfully", "success"); // CHANGE
+          } catch (error) {
+            console.error("Failed to delete", error);
+            showToast(error.message || "Failed to delete", "error"); // CHANGE
+          }
     }
     // Calculate totals from cards
     const totalBudget = cards.reduce((sum, card) => sum + Number(card.budget || 0), 0);

@@ -1,8 +1,7 @@
 import { useState } from "react"
 import { Brain, TrendingUp, AlertCircle, CheckCircle, Lightbulb, Target } from "lucide-react"
 import "./Recommendations.css"
-import { getRecommendation } from "../api";
-
+import { getRecommendation } from "../../api";
 export default function RecommendationCard() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {CreditCard, X} from "lucide-react";
 import "./CardForm.css"
+import { addCard, updateSpent } from "../api";
 
 const CardForm = ({isOpen, existingCard={}, updateCallBack, onClose, showToast}) => {
     const [cardName, setCardName] = useState(existingCard.cardName || '')
@@ -23,24 +24,18 @@ const CardForm = ({isOpen, existingCard={}, updateCallBack, onClose, showToast})
             bank,
             spent,
         }
-        const url = '/api/' + (updating ? `update_spent/${existingCard.id}`: "add_cards")
-        const options = {
-            method: updating ? "PATCH": "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(data),
-            credentials: "include"
-        }
-        const response = await fetch(url, options)
-        if (response.status === 200 || response.status === 201){
-            const data = await response.json()
-            showToast(data.message, 'success')
-            updateCallBack()
-        } else {
-            const data = await response.json()
-            showToast(data.message || 'An error occurred', 'error')
-        }        
+        try {
+            // CHANGE: replace manual fetch with helpers
+            const result = updating
+              ? await updateSpent(existingCard.id, data)
+              : await addCard(data);
+      
+            showToast((result?.message) || (updating ? "Updated" : "Created"), "success"); // CHANGE
+            updateCallBack(); // CHANGE
+          } catch (err) {
+            console.error(err);
+            showToast(err.message || "An error occurred", "error"); // CHANGE
+          }     
     }
     const modalTitle = updating ? "Edit Card" : "Add New Card";
     return (

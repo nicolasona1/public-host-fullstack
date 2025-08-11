@@ -7,33 +7,13 @@ const Login = ({onLoginSuccess, onSignupClick}) => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        try{
-            //Clear the previous session
-            await fetch('/api/logout', {method: "POST", credentials: "include"})
-            
-            const response = await fetch("/api/login", {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ usrName, email }),
-                credentials:"include",
-            })
-            
-            if (response.ok) {
-                const data = await response.json();
-                // Login successful
-                onLoginSuccess(data.user);
-            } else {
-                // Login failed
-                try {
-                    const data = await response.json();
-                    setError(data.message || "Login failed");
-                } catch (parseError) {
-                    setError("Login failed. Please try again.");
-                }
-            }
-        } catch (err){
-            console.error("Login error", err)
-            setError("Something went wrong. Try again.");
+        setError(""); // CHANGE: reset error
+        try {
+          await logout(); // CHANGE: clear previous session
+          const data = await login({ usrName, email }); // CHANGE
+          onLoginSuccess(data.user); // CHANGE
+        } catch (err) {
+          setError(err.message || "Login failed"); // CHANGE
         }
     }
     return (

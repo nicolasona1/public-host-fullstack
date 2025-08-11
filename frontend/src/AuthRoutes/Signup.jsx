@@ -6,30 +6,13 @@ const Signup = ({onSignupClick}) => {
     const [email, setEmail] = useState("")
     const onSubmit = async (e) => {
         e.preventDefault()
-        // Clear any previous session
-        await fetch("/api/logout", { method: "POST", credentials: "include" });
-
-        const data = {
-            fullName,
-            usrName,
-            email,
-        }
-        const url = '/api/sign_up'
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(data),
-            credentials: 'include'
-        }
-        const response = await fetch(url, options)
-        if (response.status !== 201 && response.status !== 200){
-            const data = await response.json()
-            alert(data.message)
-        } else {
-            onSignupClick()
-        }
+        try {
+            await logout(); // CHANGE: clear any existing session
+            await signUp({ fullName, usrName, email }); // CHANGE
+            onSignupClick(); // CHANGE
+          } catch (err) {
+            alert(err.message || "Sign up failed"); // CHANGE
+          }
     }
     return(
         <form onSubmit={onSubmit}>

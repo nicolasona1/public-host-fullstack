@@ -9,6 +9,8 @@ import CardDashboard from './CreditCard/CardDashboard'
 import CardForm from './CreditCard/CardForm'
 import Toast from './Toast/Toast'
 import Navbar2 from './Navbar/Navbar2'
+import { getUserCards } from "./api";
+
 function App() {
   const [cards, setCards] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,19 +42,12 @@ function App() {
 
   const fetchCards = async () => { 
     try {
-      const response = await fetch('/api/user_cards', { credentials: 'include' }); // ensures session cookie is sent
-      if (response.ok) {
-        const data = await response.json();
-        setCards(Array.isArray(data.cards) ? data.cards : []); // safer assignment
-      } else if (response.status === 401) {
-        setCards([]); // not logged in; keep UI consistent
-      } else {
-        console.log('Error fetching cards:', response.status);
-        setCards([]);
-      }
+      // CHANGE: use helper
+      const data = await getUserCards();
+      setCards(Array.isArray(data.cards) ? data.cards : []); // CHANGE
     } catch (err) {
       console.log('Error fetching cards:', err);
-      setCards([]);
+      setCards([]); // CHANGE
     }
   };
 

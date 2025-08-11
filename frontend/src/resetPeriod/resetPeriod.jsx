@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react"; 
 import { Settings, Calendar, RotateCcw } from "lucide-react";
 import "./resetPeriod.css"; 
+// CHANGE: import typed helpers instead of raw fetch
+import { getUserCards, updateResetPeriod } from "../api"; // if this path breaks, use "./api"
+
 export function ResetPeriod(){
   const [resetPeriod, setResetPeriod] = useState("monthly");
   const [lastResetDate, setLastResetDate] = useState(null);
@@ -9,9 +12,9 @@ export function ResetPeriod(){
   useEffect(() => {
     const fetchResetInfo = async () => {
       try {
-        const res = await fetch("/api/user_cards", { credentials: "include" });
-        const data = await res.json();
-        const cards = data.cards;
+        // CHANGE: call backend via helper (uses VITE_API_BASE_URL + credentials)
+        const data = await getUserCards();
+        const cards = data.cards || []; // CHANGE: keep your existing shape
         if (cards.length > 0) {
           setResetPeriod(cards[0].reset_period);
           setLastResetDate(cards[0].last_reset);
@@ -27,20 +30,12 @@ export function ResetPeriod(){
   const onResetPeriodChange = async (period) => {
     if (period === resetPeriod) return;
     try {
-      const res = await fetch("/api/update_reset_period", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ resetPeriod: period }),
-      });
-      if (res.ok) {
-        setResetPeriod(period);
-      } else {
-        const data = await res.json();
-        alert(data.message || "Failed to update reset period.");
-      }
+      // CHANGE: use helper; it handles headers/credentials/base URL
+      await updateResetPeriod(period);
+      setResetPeriod(period); // CHANGE: update UI after success
     } catch (err) {
       console.error("Update failed", err);
+      alert("Failed to update reset period."); // CHANGE: preserve your alert behavior
     }
   };
 
@@ -57,6 +52,7 @@ export function ResetPeriod(){
     }
     return date.toISOString().split("T")[0];
   };
+
   return (
     <div className="reset-settings-card">
       <div className="reset-settings-header">

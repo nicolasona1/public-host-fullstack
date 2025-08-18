@@ -1,6 +1,8 @@
 from pathlib import Path
 from flask import send_from_directory
 from config import app, db
+# Import models so SQLAlchemy knows about them before create_all()
+from models import User, CreditCard
 from auth_routes import auth
 from card_routes import cards
 from ai_routes import ai
@@ -14,7 +16,7 @@ app.register_blueprint(ai,    url_prefix="/api")
 def health():
     return {"ok": True}
 
-# Serve SPA (React build copied to ./static)
+# ---- SPA: serve the React build from ./static ----
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def spa(path: str):
@@ -24,7 +26,6 @@ def spa(path: str):
         return send_from_directory(static_dir, path)
     return send_from_directory(static_dir, "index.html")
 
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(host="0.0.0.0", port=5002, debug=True)
+# IMPORTANT: create tables even when running under Gunicorn (Render)
+with app.app_context():
+    db.create_all()

@@ -16,6 +16,9 @@ elif raw_url.startswith("postgresql://") and "+psycopg" not in raw_url:
 
 app.config["SQLALCHEMY_DATABASE_URI"] = raw_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = True  # Render is HTTPS
+
 
 # CORS is only for local dev; in production you’re same-origin
 CORS(app, supports_credentials=True, origins=[

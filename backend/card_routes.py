@@ -85,7 +85,9 @@ def update_spent(card_id):
     #request previous information and update it
     data = request.json
     card.spent = data.get("spent", card.spent)
-
+    card.card_name = data.get("cardName", card.card_name)
+    card.budget = data.get("budget", card.budget)
+    card.bank = data.get("bank", card.bank)
     db.session.commit()
     return jsonify({"message":"Amount updated."})
 #delete a card

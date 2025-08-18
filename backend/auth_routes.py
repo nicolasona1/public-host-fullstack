@@ -6,7 +6,6 @@ from models import User
 
 auth = Blueprint("auth", __name__)
 
-# ---------- SIGN UP ----------
 @auth.route("/sign_up", methods=["POST"])
 def sign_up():
     data = request.get_json(silent=True) or {}
@@ -14,12 +13,10 @@ def sign_up():
     usr_name  = (data.get("usrName")  or "").strip()
     email     = (data.get("email")    or "").strip().lower()
 
-    # basic validation
     if not full_name or not usr_name or not email:
         return jsonify({"message": "Missing fullName, usrName, or email"}), 400
 
     try:
-        # 1) check if user exists by username OR email
         existing = User.query.filter(
             or_(User.usr_name == usr_name, User.email == email)
         ).first()
@@ -28,12 +25,10 @@ def sign_up():
             field = "username" if existing.usr_name == usr_name else "email"
             return jsonify({"message": f"{field.capitalize()} already in use"}), 409
 
-        # 2) create and persist
         user = User(full_name=full_name, usr_name=usr_name, email=email)
         db.session.add(user)
         db.session.commit()
 
-        # 3) set session (same-origin cookie on Render)
         session.clear()
         session["userId"]  = user.id
         session["usrName"] = user.usr_name
@@ -47,11 +42,10 @@ def sign_up():
         return jsonify({"message": "Account already exists (unique constraint)"}), 409
     except SQLAlchemyError as e:
         db.session.rollback()
-        # return a compact, useful error for debugging
-        return jsonify({"message": "Database error on sign_up", "detail": str(e.__class__.__name__)}), 500
+        app = auth  # for logging via blueprint logger
+        auth.logger.exception("DB error on sign_up")
+        return jsonify({"message": "Database error on sign_up"}), 500
 
-
-# ---------- LOGIN ----------
 @auth.route("/login", methods=["POST"])
 def login():
     data = request.get_json(silent=True) or {}
@@ -74,11 +68,10 @@ def login():
 
         return jsonify({"message": f"Welcome back, {user.full_name}!", "user": user.to_json()}), 200
 
-    except SQLAlchemyError as e:
-        return jsonify({"message": "Database error on login", "detail": str(e.__class__.__name__)}), 500
+    except SQLAlchemyError:
+        auth.logger.exception("DB error on login")
+        return jsonify({"message": "Database error on login"}), 500
 
-
-# ---------- LOGOUT ----------
 @auth.route("/logout", methods=["POST"])
 def logout():
     session.clear()

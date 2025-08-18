@@ -3,11 +3,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
+# Serve React build from ./static at site root
 app = Flask(__name__, static_folder="static", static_url_path="/")
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "change-me")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "change-me")
 
-# Use Render Postgres if set; otherwise fallback to /tmp SQLite (writable on Render)
+# --- Use Render Postgres if present; safe SQLite fallback in /tmp (writable on Render) ---
 raw_url = os.getenv("DATABASE_URL", "sqlite:////tmp/mydatabase.db")
+# Normalize for SQLAlchemy + psycopg v3
 if raw_url.startswith("postgres://"):
     raw_url = raw_url.replace("postgres://", "postgresql+psycopg://", 1)
 elif raw_url.startswith("postgresql://") and "+psycopg" not in raw_url:
@@ -16,11 +18,11 @@ elif raw_url.startswith("postgresql://") and "+psycopg" not in raw_url:
 app.config["SQLALCHEMY_DATABASE_URI"] = raw_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# Cookies (same-origin on Render over HTTPS)
+# Cookies (same-origin on Render HTTPS)
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_SECURE"] = True
 
-# CORS only for local dev
+# CORS only matters during local dev (Vite)
 CORS(app, supports_credentials=True, origins=[
     "http://localhost:5173", "http://127.0.0.1:5173",
     "http://localhost:3000", "http://127.0.0.1:3000",
